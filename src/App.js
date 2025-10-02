@@ -4,7 +4,7 @@ function App() {
   const [name, setName] = useState("");
   const [greet, setGreet] = useState("");
 
-  const handleGreet = () => setGreet(`Hello, ${name}!`);
+  const handleGreet = () => setGreet(`Hello, ${name}! + darling`);
 
   return (
     <div style={{ padding: 20, , fontFamily: "Arial", maxWidth: 400  }}>
