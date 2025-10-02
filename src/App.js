@@ -7,7 +7,7 @@ function App() {
   const handleGreet = () => setGreet(`Hello, ${name}! + darling`);
 
   return (
-    <div style={{ padding: 20, , fontFamily: "Arial", maxWidth: 400  }}>
+    <div style={{ padding: 20, fontFamily: "Arial", maxWidth: 400  }}>
       <input 
         placeholder="Enter your name" 
         value={name} 
