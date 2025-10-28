@@ -6,14 +6,15 @@ function App() {
   const [filter, setFilter] = useState("all"); // "all", "done", "pending"
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState("newest"); // "newest" or "oldest"
-
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:8000";
   // -----------------------------
   // Fetch tasks
   // -----------------------------
 useEffect(() => {
   const fetchTasks = async () => {
     try {
-      const res = await fetch("http://backend:8000/tasks");
+     
+      const res = await fetch(`${API_BASE}/tasks`);
       console.log("Fetch raw response:", res); // <-- check status
       const data = await res.json();
       console.log("Fetched data:", data);      // <-- should be array
@@ -31,7 +32,7 @@ useEffect(() => {
   const addTask = async () => {
     if (!newTask.trim()) return;
     try {
-      const res = await fetch("http://backend:8000/tasks", {
+  const res = await fetch(`${API_BASE}/tasks`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: newTask }),
@@ -49,7 +50,7 @@ useEffect(() => {
   // -----------------------------
   const toggleTask = async (id, currentDone) => {
     try {
-      const res = await fetch(`http://backend:8000/tasks/${id}`, {
+  const res = await fetch(`${API_BASE}/tasks/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ done: !currentDone }),
@@ -68,7 +69,7 @@ useEffect(() => {
   // -----------------------------
   const deleteTask = async (id) => {
     try {
-      await fetch(`http://backend:8000/tasks/${id}`, { method: "DELETE" });
+  await fetch(`${API_BASE}/tasks/${id}`, { method: "DELETE" });
       setTasks((prev) => prev.filter((t) => t.id !== id));
     } catch (err) {
       console.error("Error deleting task:", err);
